@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(val Itemlist:List<itemlist>): RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ItemName: TextView = view.findViewById(R.id.itemName)
+        val ItemTime:TextView=view.findViewById(R.id.itemTime)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,6 +22,7 @@ class ItemAdapter: RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = Itemlist[position]
-        holder.ItemName.text = item.text
+        holder.ItemName.text = item.itemname
+        holder.ItemTime.text =item.time
     }
 }

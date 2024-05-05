@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     tools:context=".FunctionActivity">
+
     <Button
         android:id="@+id/btn_name"
         android:layout_width="180dp"
@@ -15,8 +16,10 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/rv_item"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.546" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_item"
@@ -26,6 +29,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.268"
         tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="删除计划"
+        android:id="@+id/deleteitem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <Button
+        android:id="@+id/renewitem"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="更新计划"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_house"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07" />
 
     <Button
         android:id="@+id/btn_house"
@@ -39,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <Button
         android:id="@+id/btn_score"

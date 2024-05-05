@@ -19,7 +19,7 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
         val edit1: EditText =findViewById(R.id.editText3)
         val edit2: EditText =findViewById(R.id.editText2)
-        val dbHelper=Mysqlhelper(this,"Item.db",1)
+        val dbHelper=Mysqlhelper(this,"wt.db",1)
         val db=dbHelper.writableDatabase
         val submit : Button =findViewById(R.id.btn_submit)
         submit.setOnClickListener {
@@ -39,5 +39,6 @@ class MainActivity2 : AppCompatActivity() {
         }
 
     }
+
 
 }

@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipData.Item
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,11 +14,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-val Itemlist= ArrayList<Item>()
+val Itemlist= ArrayList<itemlist>()
 
 class FunctionActivity : AppCompatActivity() {
 
-    @SuppressLint("Range")
+    @SuppressLint("Range", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_function)
@@ -43,21 +44,43 @@ class FunctionActivity : AppCompatActivity() {
             val i1 = Intent(this, MainActivity2::class.java)
             startActivity(i1)
         }
-        val dbHelper=Mysqlhelper(this,"Item.db",1)
+
+        val dbHelper=Mysqlhelper(this,"wt.db",1)
         val db=dbHelper.writableDatabase
+        val newer: Button = findViewById(R.id.renewitem)
+        newer.setOnClickListener {
+            val values=ContentValues()
+            values.put("time","30")
+            db.update("Item",values,"time<?", arrayOf("10"))
+        }
+        val deleteitem:Button=findViewById(R.id.deleteitem)
+        deleteitem.setOnClickListener {
+            db.delete("Item","time<?", arrayOf("10"))
+        }
         val cursor=db.query("Item",null,null,null,null,null,null)
         if(cursor.moveToFirst()){
             do {
                 val name=cursor.getString(cursor.getColumnIndex("item"))
                 val times=cursor.getString(cursor.getColumnIndex("time"))
-                Log.d("FunctionActivity","tiaoshi")
-                Itemlist.add(ClipData.Item(name, times))
+                Log.d("function",name)
+                Log.d("function",times)
+                Itemlist.add(itemlist(name, times))
             }while (cursor.moveToNext())
         }
         val layoutManager = LinearLayoutManager(this)
         val recyclerView: RecyclerView = findViewById(R.id.rv_item)
         recyclerView.layoutManager = layoutManager
-        val adapter = ItemAdapter()
+        val adapter = ItemAdapter(Itemlist)
+        recyclerView.adapter = adapter
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        setContentView(R.layout.activity_function)
+        val layoutManager = LinearLayoutManager(this)
+        val recyclerView: RecyclerView = findViewById(R.id.rv_item)
+        recyclerView.layoutManager = layoutManager
+        val adapter = ItemAdapter(Itemlist)
         recyclerView.adapter = adapter
     }
 }
