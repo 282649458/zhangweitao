@@ -74,9 +74,22 @@ class FunctionActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
+    @SuppressLint("Range")
     override fun onRestart() {
         super.onRestart()
         setContentView(R.layout.activity_function)
+        val dbHelper=Mysqlhelper(this,"wt.db",1)
+        val db=dbHelper.writableDatabase
+        val cursor=db.query("Item",null,null,null,null,null,null)
+        if(cursor.moveToFirst()){
+            do {
+                val name=cursor.getString(cursor.getColumnIndex("item"))
+                val times=cursor.getString(cursor.getColumnIndex("time"))
+                Log.d("function",name)
+                Log.d("function",times)
+                Itemlist.add(itemlist(name, times))
+            }while (cursor.moveToNext())
+        }
         val layoutManager = LinearLayoutManager(this)
         val recyclerView: RecyclerView = findViewById(R.id.rv_item)
         recyclerView.layoutManager = layoutManager
