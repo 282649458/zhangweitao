@@ -15,27 +15,26 @@
         <activity
             android:name=".Feedback"
             android:exported="false"
-            android:launchMode="singleTask"/>
+           />
         <activity
             android:name=".MineActivity"
             android:exported="false"
-            android:launchMode="singleTask"/>
+            />
         <activity
             android:name=".ScoreActivity"
             android:exported="false"
-            android:launchMode="singleTask" />
+           />
         <activity
             android:name=".MainActivity2"
-            android:exported="false"
-            android:launchMode="singleTask"/>
+            />
         <activity
             android:name=".FunctionActivity"
             android:exported="false"
-            android:launchMode="singleTask"/>
+           />
         <activity
             android:name=".Register"
             android:exported="false"
-            android:launchMode="singleTask"/>
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true">

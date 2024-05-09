@@ -45,50 +45,27 @@ class FunctionActivity : AppCompatActivity() {
             startActivity(i1)
         }
 
-        val dbHelper=Mysqlhelper(this,"wt.db",1)
-        val db=dbHelper.writableDatabase
+        val dbHelper = Mysqlhelper(this, "wt.db", 1)
+        val db = dbHelper.writableDatabase
         val newer: Button = findViewById(R.id.renewitem)
         newer.setOnClickListener {
-            val values=ContentValues()
-            values.put("time","30")
-            db.update("Item",values,"time<?", arrayOf("10"))
+            val values = ContentValues()
+            values.put("time", "30")
+            db.update("Item", values, "time<?", arrayOf("10"))
         }
-        val deleteitem:Button=findViewById(R.id.deleteitem)
+        val deleteitem: Button = findViewById(R.id.deleteitem)
         deleteitem.setOnClickListener {
-            db.delete("Item","time<?", arrayOf("10"))
+            db.delete("Item", "time<?", arrayOf("10"))
         }
-        val cursor=db.query("Item",null,null,null,null,null,null)
-        if(cursor.moveToFirst()){
+        val cursor = db.query("Item", null, null, null, null, null, null)
+        if (cursor.moveToFirst()) {
             do {
-                val name=cursor.getString(cursor.getColumnIndex("item"))
-                val times=cursor.getString(cursor.getColumnIndex("time"))
-                Log.d("function",name)
-                Log.d("function",times)
+                val name = cursor.getString(cursor.getColumnIndex("item"))
+                val times = cursor.getString(cursor.getColumnIndex("time"))
+                Log.d("function", name)
+                Log.d("function", times)
                 Itemlist.add(itemlist(name, times))
-            }while (cursor.moveToNext())
-        }
-        val layoutManager = LinearLayoutManager(this)
-        val recyclerView: RecyclerView = findViewById(R.id.rv_item)
-        recyclerView.layoutManager = layoutManager
-        val adapter = ItemAdapter(Itemlist)
-        recyclerView.adapter = adapter
-    }
-
-    @SuppressLint("Range")
-    override fun onRestart() {
-        super.onRestart()
-        setContentView(R.layout.activity_function)
-        val dbHelper=Mysqlhelper(this,"wt.db",1)
-        val db=dbHelper.writableDatabase
-        val cursor=db.query("Item",null,null,null,null,null,null)
-        if(cursor.moveToFirst()){
-            do {
-                val name=cursor.getString(cursor.getColumnIndex("item"))
-                val times=cursor.getString(cursor.getColumnIndex("time"))
-                Log.d("function",name)
-                Log.d("function",times)
-                Itemlist.add(itemlist(name, times))
-            }while (cursor.moveToNext())
+            } while (cursor.moveToNext())
         }
         val layoutManager = LinearLayoutManager(this)
         val recyclerView: RecyclerView = findViewById(R.id.rv_item)
